@@ -20,18 +20,7 @@ import javax.xml.bind.annotation.XmlValue;
 /**
  * <p>Java class for anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="Type" use="required" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
+ * <p>The following schema fragment specifies the expected content contained within this class. 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)

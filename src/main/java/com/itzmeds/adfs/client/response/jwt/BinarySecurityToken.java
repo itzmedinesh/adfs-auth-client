@@ -22,19 +22,6 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType>
- *   &lt;simpleContent>
- *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>base64Binary">
- *       &lt;attribute name="EncodingType" use="required" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
- *       &lt;attribute name="ValueType" use="required" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
- *       &lt;attribute ref="{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Id use="required""/>
- *     &lt;/extension>
- *   &lt;/simpleContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {

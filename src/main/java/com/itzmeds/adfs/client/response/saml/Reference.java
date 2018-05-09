@@ -23,22 +23,6 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within
  * this class.
  * 
- * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.w3.org/2000/09/xmldsig#}Transforms"/>
- *         &lt;element ref="{http://www.w3.org/2000/09/xmldsig#}DigestMethod"/>
- *         &lt;element ref="{http://www.w3.org/2000/09/xmldsig#}DigestValue"/>
- *       &lt;/sequence>
- *       &lt;attribute name="URI" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = { "transforms", "digestMethod", "digestValue" })

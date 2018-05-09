@@ -21,21 +21,6 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.w3.org/2005/08/addressing}To"/>
- *         &lt;element ref="{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd}Security"/>
- *         &lt;element ref="{http://www.w3.org/2005/08/addressing}Action"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {

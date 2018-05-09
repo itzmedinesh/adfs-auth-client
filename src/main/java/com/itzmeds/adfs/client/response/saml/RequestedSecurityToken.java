@@ -29,130 +29,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * The following schema fragment specifies the expected content contained within
  * this class.
  * 
- * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="Assertion" form="unqualified">
- *           &lt;complexType>
- *             &lt;complexContent>
- *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                 &lt;sequence>
- *                   &lt;element name="Issuer" type="{http://www.w3.org/2001/XMLSchema}anyURI" form="unqualified"/>
- *                   &lt;element ref="{http://www.w3.org/2000/09/xmldsig#}Signature"/>
- *                   &lt;element name="Subject" form="unqualified">
- *                     &lt;complexType>
- *                       &lt;complexContent>
- *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                           &lt;sequence>
- *                             &lt;element name="SubjectConfirmation" form="unqualified">
- *                               &lt;complexType>
- *                                 &lt;complexContent>
- *                                   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                                     &lt;sequence>
- *                                       &lt;element name="SubjectConfirmationData" form="unqualified">
- *                                         &lt;complexType>
- *                                           &lt;complexContent>
- *                                             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                                               &lt;attribute name="NotOnOrAfter" use="required" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
- *                                             &lt;/restriction>
- *                                           &lt;/complexContent>
- *                                         &lt;/complexType>
- *                                       &lt;/element>
- *                                     &lt;/sequence>
- *                                     &lt;attribute name="Method" use="required" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
- *                                   &lt;/restriction>
- *                                 &lt;/complexContent>
- *                               &lt;/complexType>
- *                             &lt;/element>
- *                           &lt;/sequence>
- *                         &lt;/restriction>
- *                       &lt;/complexContent>
- *                     &lt;/complexType>
- *                   &lt;/element>
- *                   &lt;element name="Conditions" form="unqualified">
- *                     &lt;complexType>
- *                       &lt;complexContent>
- *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                           &lt;sequence>
- *                             &lt;element name="AudienceRestriction" form="unqualified">
- *                               &lt;complexType>
- *                                 &lt;complexContent>
- *                                   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                                     &lt;sequence>
- *                                       &lt;element name="Audience" type="{http://www.w3.org/2001/XMLSchema}NMTOKEN" form="unqualified"/>
- *                                     &lt;/sequence>
- *                                   &lt;/restriction>
- *                                 &lt;/complexContent>
- *                               &lt;/complexType>
- *                             &lt;/element>
- *                           &lt;/sequence>
- *                           &lt;attribute name="NotBefore" use="required" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
- *                           &lt;attribute name="NotOnOrAfter" use="required" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
- *                         &lt;/restriction>
- *                       &lt;/complexContent>
- *                     &lt;/complexType>
- *                   &lt;/element>
- *                   &lt;element name="AttributeStatement" form="unqualified">
- *                     &lt;complexType>
- *                       &lt;complexContent>
- *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                           &lt;sequence>
- *                             &lt;element name="Attribute" maxOccurs="unbounded" form="unqualified">
- *                               &lt;complexType>
- *                                 &lt;complexContent>
- *                                   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                                     &lt;sequence>
- *                                       &lt;element name="AttributeValue" type="{http://www.w3.org/2001/XMLSchema}NCName" form="unqualified"/>
- *                                     &lt;/sequence>
- *                                     &lt;attribute name="Name" use="required" type="{http://www.w3.org/2001/XMLSchema}NCName" />
- *                                   &lt;/restriction>
- *                                 &lt;/complexContent>
- *                               &lt;/complexType>
- *                             &lt;/element>
- *                           &lt;/sequence>
- *                         &lt;/restriction>
- *                       &lt;/complexContent>
- *                     &lt;/complexType>
- *                   &lt;/element>
- *                   &lt;element name="AuthnStatement" form="unqualified">
- *                     &lt;complexType>
- *                       &lt;complexContent>
- *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                           &lt;sequence>
- *                             &lt;element name="AuthnContext" form="unqualified">
- *                               &lt;complexType>
- *                                 &lt;complexContent>
- *                                   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                                     &lt;sequence>
- *                                       &lt;element name="AuthnContextClassRef" type="{http://www.w3.org/2001/XMLSchema}anyURI" form="unqualified"/>
- *                                     &lt;/sequence>
- *                                   &lt;/restriction>
- *                                 &lt;/complexContent>
- *                               &lt;/complexType>
- *                             &lt;/element>
- *                           &lt;/sequence>
- *                           &lt;attribute name="AuthnInstant" use="required" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
- *                         &lt;/restriction>
- *                       &lt;/complexContent>
- *                     &lt;/complexType>
- *                   &lt;/element>
- *                 &lt;/sequence>
- *                 &lt;attribute name="ID" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
- *                 &lt;attribute name="IssueInstant" use="required" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
- *                 &lt;attribute name="Version" use="required" type="{http://www.w3.org/2001/XMLSchema}decimal" />
- *               &lt;/restriction>
- *             &lt;/complexContent>
- *           &lt;/complexType>
- *         &lt;/element>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = { "assertion" })
@@ -186,124 +62,6 @@ public class RequestedSecurityToken {
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
-	 * <p>
-	 * The following schema fragment specifies the expected content contained within
-	 * this class.
-	 * 
-	 * <pre>
-	 * &lt;complexType>
-	 *   &lt;complexContent>
-	 *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-	 *       &lt;sequence>
-	 *         &lt;element name="Issuer" type="{http://www.w3.org/2001/XMLSchema}anyURI" form="unqualified"/>
-	 *         &lt;element ref="{http://www.w3.org/2000/09/xmldsig#}Signature"/>
-	 *         &lt;element name="Subject" form="unqualified">
-	 *           &lt;complexType>
-	 *             &lt;complexContent>
-	 *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-	 *                 &lt;sequence>
-	 *                   &lt;element name="SubjectConfirmation" form="unqualified">
-	 *                     &lt;complexType>
-	 *                       &lt;complexContent>
-	 *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-	 *                           &lt;sequence>
-	 *                             &lt;element name="SubjectConfirmationData" form="unqualified">
-	 *                               &lt;complexType>
-	 *                                 &lt;complexContent>
-	 *                                   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-	 *                                     &lt;attribute name="NotOnOrAfter" use="required" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
-	 *                                   &lt;/restriction>
-	 *                                 &lt;/complexContent>
-	 *                               &lt;/complexType>
-	 *                             &lt;/element>
-	 *                           &lt;/sequence>
-	 *                           &lt;attribute name="Method" use="required" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
-	 *                         &lt;/restriction>
-	 *                       &lt;/complexContent>
-	 *                     &lt;/complexType>
-	 *                   &lt;/element>
-	 *                 &lt;/sequence>
-	 *               &lt;/restriction>
-	 *             &lt;/complexContent>
-	 *           &lt;/complexType>
-	 *         &lt;/element>
-	 *         &lt;element name="Conditions" form="unqualified">
-	 *           &lt;complexType>
-	 *             &lt;complexContent>
-	 *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-	 *                 &lt;sequence>
-	 *                   &lt;element name="AudienceRestriction" form="unqualified">
-	 *                     &lt;complexType>
-	 *                       &lt;complexContent>
-	 *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-	 *                           &lt;sequence>
-	 *                             &lt;element name="Audience" type="{http://www.w3.org/2001/XMLSchema}NMTOKEN" form="unqualified"/>
-	 *                           &lt;/sequence>
-	 *                         &lt;/restriction>
-	 *                       &lt;/complexContent>
-	 *                     &lt;/complexType>
-	 *                   &lt;/element>
-	 *                 &lt;/sequence>
-	 *                 &lt;attribute name="NotBefore" use="required" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
-	 *                 &lt;attribute name="NotOnOrAfter" use="required" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
-	 *               &lt;/restriction>
-	 *             &lt;/complexContent>
-	 *           &lt;/complexType>
-	 *         &lt;/element>
-	 *         &lt;element name="AttributeStatement" form="unqualified">
-	 *           &lt;complexType>
-	 *             &lt;complexContent>
-	 *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-	 *                 &lt;sequence>
-	 *                   &lt;element name="Attribute" maxOccurs="unbounded" form="unqualified">
-	 *                     &lt;complexType>
-	 *                       &lt;complexContent>
-	 *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-	 *                           &lt;sequence>
-	 *                             &lt;element name="AttributeValue" type="{http://www.w3.org/2001/XMLSchema}NCName" form="unqualified"/>
-	 *                           &lt;/sequence>
-	 *                           &lt;attribute name="Name" use="required" type="{http://www.w3.org/2001/XMLSchema}NCName" />
-	 *                         &lt;/restriction>
-	 *                       &lt;/complexContent>
-	 *                     &lt;/complexType>
-	 *                   &lt;/element>
-	 *                 &lt;/sequence>
-	 *               &lt;/restriction>
-	 *             &lt;/complexContent>
-	 *           &lt;/complexType>
-	 *         &lt;/element>
-	 *         &lt;element name="AuthnStatement" form="unqualified">
-	 *           &lt;complexType>
-	 *             &lt;complexContent>
-	 *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-	 *                 &lt;sequence>
-	 *                   &lt;element name="AuthnContext" form="unqualified">
-	 *                     &lt;complexType>
-	 *                       &lt;complexContent>
-	 *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-	 *                           &lt;sequence>
-	 *                             &lt;element name="AuthnContextClassRef" type="{http://www.w3.org/2001/XMLSchema}anyURI" form="unqualified"/>
-	 *                           &lt;/sequence>
-	 *                         &lt;/restriction>
-	 *                       &lt;/complexContent>
-	 *                     &lt;/complexType>
-	 *                   &lt;/element>
-	 *                 &lt;/sequence>
-	 *                 &lt;attribute name="AuthnInstant" use="required" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
-	 *               &lt;/restriction>
-	 *             &lt;/complexContent>
-	 *           &lt;/complexType>
-	 *         &lt;/element>
-	 *       &lt;/sequence>
-	 *       &lt;attribute name="ID" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
-	 *       &lt;attribute name="IssueInstant" use="required" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
-	 *       &lt;attribute name="Version" use="required" type="{http://www.w3.org/2001/XMLSchema}decimal" />
-	 *     &lt;/restriction>
-	 *   &lt;/complexContent>
-	 * &lt;/complexType>
-	 * </pre>
-	 * 
 	 * 
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
@@ -535,34 +293,6 @@ public class RequestedSecurityToken {
 		 * <p>
 		 * Java class for anonymous complex type.
 		 * 
-		 * <p>
-		 * The following schema fragment specifies the expected content contained within
-		 * this class.
-		 * 
-		 * <pre>
-		 * &lt;complexType>
-		 *   &lt;complexContent>
-		 *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-		 *       &lt;sequence>
-		 *         &lt;element name="Attribute" maxOccurs="unbounded" form="unqualified">
-		 *           &lt;complexType>
-		 *             &lt;complexContent>
-		 *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-		 *                 &lt;sequence>
-		 *                   &lt;element name="AttributeValue" type="{http://www.w3.org/2001/XMLSchema}NCName" form="unqualified"/>
-		 *                 &lt;/sequence>
-		 *                 &lt;attribute name="Name" use="required" type="{http://www.w3.org/2001/XMLSchema}NCName" />
-		 *               &lt;/restriction>
-		 *             &lt;/complexContent>
-		 *           &lt;/complexType>
-		 *         &lt;/element>
-		 *       &lt;/sequence>
-		 *     &lt;/restriction>
-		 *   &lt;/complexContent>
-		 * &lt;/complexType>
-		 * </pre>
-		 * 
-		 * 
 		 */
 		@XmlAccessorType(XmlAccessType.FIELD)
 		@XmlType(name = "", propOrder = { "attribute" })
@@ -604,24 +334,6 @@ public class RequestedSecurityToken {
 			/**
 			 * <p>
 			 * Java class for anonymous complex type.
-			 * 
-			 * <p>
-			 * The following schema fragment specifies the expected content contained within
-			 * this class.
-			 * 
-			 * <pre>
-			 * &lt;complexType>
-			 *   &lt;complexContent>
-			 *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-			 *       &lt;sequence>
-			 *         &lt;element name="AttributeValue" type="{http://www.w3.org/2001/XMLSchema}NCName" form="unqualified"/>
-			 *       &lt;/sequence>
-			 *       &lt;attribute name="Name" use="required" type="{http://www.w3.org/2001/XMLSchema}NCName" />
-			 *     &lt;/restriction>
-			 *   &lt;/complexContent>
-			 * &lt;/complexType>
-			 * </pre>
-			 * 
 			 * 
 			 */
 			@XmlAccessorType(XmlAccessType.FIELD)
@@ -697,34 +409,6 @@ public class RequestedSecurityToken {
 		 * <p>
 		 * Java class for anonymous complex type.
 		 * 
-		 * <p>
-		 * The following schema fragment specifies the expected content contained within
-		 * this class.
-		 * 
-		 * <pre>
-		 * &lt;complexType>
-		 *   &lt;complexContent>
-		 *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-		 *       &lt;sequence>
-		 *         &lt;element name="AuthnContext" form="unqualified">
-		 *           &lt;complexType>
-		 *             &lt;complexContent>
-		 *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-		 *                 &lt;sequence>
-		 *                   &lt;element name="AuthnContextClassRef" type="{http://www.w3.org/2001/XMLSchema}anyURI" form="unqualified"/>
-		 *                 &lt;/sequence>
-		 *               &lt;/restriction>
-		 *             &lt;/complexContent>
-		 *           &lt;/complexType>
-		 *         &lt;/element>
-		 *       &lt;/sequence>
-		 *       &lt;attribute name="AuthnInstant" use="required" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
-		 *     &lt;/restriction>
-		 *   &lt;/complexContent>
-		 * &lt;/complexType>
-		 * </pre>
-		 * 
-		 * 
 		 */
 		@XmlAccessorType(XmlAccessType.FIELD)
 		@XmlType(name = "", propOrder = { "authnContext" })
@@ -784,23 +468,6 @@ public class RequestedSecurityToken {
 			 * <p>
 			 * Java class for anonymous complex type.
 			 * 
-			 * <p>
-			 * The following schema fragment specifies the expected content contained within
-			 * this class.
-			 * 
-			 * <pre>
-			 * &lt;complexType>
-			 *   &lt;complexContent>
-			 *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-			 *       &lt;sequence>
-			 *         &lt;element name="AuthnContextClassRef" type="{http://www.w3.org/2001/XMLSchema}anyURI" form="unqualified"/>
-			 *       &lt;/sequence>
-			 *     &lt;/restriction>
-			 *   &lt;/complexContent>
-			 * &lt;/complexType>
-			 * </pre>
-			 * 
-			 * 
 			 */
 			@XmlAccessorType(XmlAccessType.FIELD)
 			@XmlType(name = "", propOrder = { "authnContextClassRef" })
@@ -848,35 +515,6 @@ public class RequestedSecurityToken {
 		/**
 		 * <p>
 		 * Java class for anonymous complex type.
-		 * 
-		 * <p>
-		 * The following schema fragment specifies the expected content contained within
-		 * this class.
-		 * 
-		 * <pre>
-		 * &lt;complexType>
-		 *   &lt;complexContent>
-		 *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-		 *       &lt;sequence>
-		 *         &lt;element name="AudienceRestriction" form="unqualified">
-		 *           &lt;complexType>
-		 *             &lt;complexContent>
-		 *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-		 *                 &lt;sequence>
-		 *                   &lt;element name="Audience" type="{http://www.w3.org/2001/XMLSchema}NMTOKEN" form="unqualified"/>
-		 *                 &lt;/sequence>
-		 *               &lt;/restriction>
-		 *             &lt;/complexContent>
-		 *           &lt;/complexType>
-		 *         &lt;/element>
-		 *       &lt;/sequence>
-		 *       &lt;attribute name="NotBefore" use="required" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
-		 *       &lt;attribute name="NotOnOrAfter" use="required" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
-		 *     &lt;/restriction>
-		 *   &lt;/complexContent>
-		 * &lt;/complexType>
-		 * </pre>
-		 * 
 		 * 
 		 */
 		@XmlAccessorType(XmlAccessType.FIELD)
@@ -961,23 +599,6 @@ public class RequestedSecurityToken {
 			 * <p>
 			 * Java class for anonymous complex type.
 			 * 
-			 * <p>
-			 * The following schema fragment specifies the expected content contained within
-			 * this class.
-			 * 
-			 * <pre>
-			 * &lt;complexType>
-			 *   &lt;complexContent>
-			 *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-			 *       &lt;sequence>
-			 *         &lt;element name="Audience" type="{http://www.w3.org/2001/XMLSchema}NMTOKEN" form="unqualified"/>
-			 *       &lt;/sequence>
-			 *     &lt;/restriction>
-			 *   &lt;/complexContent>
-			 * &lt;/complexType>
-			 * </pre>
-			 * 
-			 * 
 			 */
 			@XmlAccessorType(XmlAccessType.FIELD)
 			@XmlType(name = "", propOrder = { "audience" })
@@ -1028,42 +649,6 @@ public class RequestedSecurityToken {
 		 * <p>
 		 * Java class for anonymous complex type.
 		 * 
-		 * <p>
-		 * The following schema fragment specifies the expected content contained within
-		 * this class.
-		 * 
-		 * <pre>
-		 * &lt;complexType>
-		 *   &lt;complexContent>
-		 *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-		 *       &lt;sequence>
-		 *         &lt;element name="SubjectConfirmation" form="unqualified">
-		 *           &lt;complexType>
-		 *             &lt;complexContent>
-		 *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-		 *                 &lt;sequence>
-		 *                   &lt;element name="SubjectConfirmationData" form="unqualified">
-		 *                     &lt;complexType>
-		 *                       &lt;complexContent>
-		 *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-		 *                           &lt;attribute name="NotOnOrAfter" use="required" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
-		 *                         &lt;/restriction>
-		 *                       &lt;/complexContent>
-		 *                     &lt;/complexType>
-		 *                   &lt;/element>
-		 *                 &lt;/sequence>
-		 *                 &lt;attribute name="Method" use="required" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
-		 *               &lt;/restriction>
-		 *             &lt;/complexContent>
-		 *           &lt;/complexType>
-		 *         &lt;/element>
-		 *       &lt;/sequence>
-		 *     &lt;/restriction>
-		 *   &lt;/complexContent>
-		 * &lt;/complexType>
-		 * </pre>
-		 * 
-		 * 
 		 */
 		@XmlAccessorType(XmlAccessType.FIELD)
 		@XmlType(name = "", propOrder = { "subjectConfirmation" })
@@ -1098,32 +683,6 @@ public class RequestedSecurityToken {
 			/**
 			 * <p>
 			 * Java class for anonymous complex type.
-			 * 
-			 * <p>
-			 * The following schema fragment specifies the expected content contained within
-			 * this class.
-			 * 
-			 * <pre>
-			 * &lt;complexType>
-			 *   &lt;complexContent>
-			 *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-			 *       &lt;sequence>
-			 *         &lt;element name="SubjectConfirmationData" form="unqualified">
-			 *           &lt;complexType>
-			 *             &lt;complexContent>
-			 *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-			 *                 &lt;attribute name="NotOnOrAfter" use="required" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
-			 *               &lt;/restriction>
-			 *             &lt;/complexContent>
-			 *           &lt;/complexType>
-			 *         &lt;/element>
-			 *       &lt;/sequence>
-			 *       &lt;attribute name="Method" use="required" type="{http://www.w3.org/2001/XMLSchema}anyURI" />
-			 *     &lt;/restriction>
-			 *   &lt;/complexContent>
-			 * &lt;/complexType>
-			 * </pre>
-			 * 
 			 * 
 			 */
 			@XmlAccessorType(XmlAccessType.FIELD)
@@ -1183,22 +742,7 @@ public class RequestedSecurityToken {
 
 				/**
 				 * <p>
-				 * Java class for anonymous complex type.
-				 * 
-				 * <p>
-				 * The following schema fragment specifies the expected content contained within
-				 * this class.
-				 * 
-				 * <pre>
-				 * &lt;complexType>
-				 *   &lt;complexContent>
-				 *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-				 *       &lt;attribute name="NotOnOrAfter" use="required" type="{http://www.w3.org/2001/XMLSchema}dateTime" />
-				 *     &lt;/restriction>
-				 *   &lt;/complexContent>
-				 * &lt;/complexType>
-				 * </pre>
-				 * 
+				 * Java class for anonymous complex type. 
 				 * 
 				 */
 				@XmlAccessorType(XmlAccessType.FIELD)

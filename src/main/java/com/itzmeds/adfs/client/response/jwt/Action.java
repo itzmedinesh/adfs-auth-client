@@ -23,16 +23,6 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType>
- *   &lt;simpleContent>
- *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>anyURI">
- *       &lt;attribute ref="{http://www.w3.org/2003/05/soap-envelope}mustUnderstand use="required""/>
- *     &lt;/extension>
- *   &lt;/simpleContent>
- * &lt;/complexType>
- * </pre>
- * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)

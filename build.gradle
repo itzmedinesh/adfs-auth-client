@@ -2,6 +2,8 @@ import static org.gradle.api.JavaVersion.VERSION_1_8
 
 apply plugin: 'java'
 apply plugin:'maven'
+apply plugin: 'signing'
+apply plugin: 'maven-publish'
 
 sourceCompatibility = VERSION_1_8
 targetCompatibility = VERSION_1_8
@@ -22,4 +24,142 @@ dependencies {
     compile 'com.sun.xml.bind:jaxb-impl:2.2.7-b41'
 
     testCompile "junit:junit:4.11"
+}
+
+javadoc {
+    source = sourceSets.main.allJava
+    classpath = configurations.compile
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+	archives jar
+    archives sourcesJar
+    archives javadocJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+def customizePom(pom) {
+    pom.withXml {
+        def root = asNode()
+
+        // eliminate test-scoped dependencies (no need in maven central POMs)
+        root.dependencies.removeAll { dep ->
+            dep.scope == "test"
+        }
+
+        // add all items necessary for maven central publication
+        root.children().last() + {
+            resolveStrategy = Closure.DELEGATE_FIRST
+
+	        name projectName
+	        description 'Java client for authentication against active directory federation service(ADFS) - SAML,JWT,BST'
+	        url 'https://github.com/itzmedinesh/adfs-auth-client.git'
+	        inceptionYear '2018'
+	            
+	        scm {
+	            url 'https://github.com/itzmedinesh/adfs-auth-client'
+	            connection 'scm:git:git://github.com/itzmedinesh/adfs-auth-client.git'
+	            developerConnection 'scm:git:git@github.com:itzmedinesh/adfs-auth-client.git'
+	        }            
+	            
+	        licenses {
+	            license {
+	                name 'The Apache Software License, Version 2.0'
+	                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+	                distribution 'repo'
+	            }
+	        }
+	        developers {
+	            developer {
+	             	id 'itzmedinesh'
+	                 name 'Dinesh Subramanian'
+	                 email 'itzmedinesh@gmail.com'
+	            }
+	        }
+
+        }
+    }
+}
+
+model {
+    tasks.generatePomFileForMavenJavaPublication {
+        destination = file("$buildDir/generated-pom.xml")
+    }
+    tasks.publishMavenJavaPublicationToMavenLocal {
+        dependsOn project.tasks.signArchives
+    }
+    tasks.publishMavenJavaPublicationToMavenRepository {
+        dependsOn project.tasks.signArchives
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            customizePom(pom)
+            groupId 'com.github.itzmedinesh'
+            artifactId projectName
+            version projectVersion
+
+            from components.java
+
+            // create the sign pom artifact
+            pom.withXml {
+                def pomFile = file("${project.buildDir}/generated-pom.xml")
+                writeTo(pomFile)
+                def pomAscFile = signing.sign(pomFile).signatureFiles[0]
+                artifact(pomAscFile) {
+                    classifier = null
+                    extension = 'pom.asc'
+                }
+            }
+
+            artifact(sourcesJar) {
+                classifier = 'sources'
+            }
+            artifact(javadocJar) {
+                classifier = 'javadoc'
+            }
+
+            // create the signed artifacts
+            project.tasks.signArchives.signatureFiles.each {
+                artifact(it) {
+                    def matcher = it.file =~ /-(sources|javadoc)\.jar\.asc$/
+                    if (matcher.find()) {
+                        classifier = matcher.group(1)
+                    } else {
+                        classifier = null
+                    }
+                    extension = 'jar.asc'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+			credentials {
+				username = project.ext['oss.sonatype.username']
+				password = project.ext['oss.sonatype.password']
+			}
+			
+			if(projectVersion.endsWith('-SNAPSHOT')) {
+				url "https://oss.sonatype.org/content/repositories/snapshots"
+			} else {
+				url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+			}
+        }
+    }
 }
