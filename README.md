@@ -36,7 +36,7 @@ String loginSvcUrlTemplate = "{\"url.hostname\":\"sts.test.com\",\"url.port\":\"
 
 ServiceUrlConfig authSvcUrlConfig = objectMapper.readValue(loginSvcUrlTemplate, ServiceUrlConfig.class);
 
-RestClientTemplate restClientTemplateTemp = new AndroidRestServiceClient().createClientTemplate("LOGIN_ACCESS_TOKEN", authSvcUrlConfig);
+RestClientTemplate restClientTemplateTemp = new RestServiceClient().createClientTemplate("LOGIN_ACCESS_TOKEN", authSvcUrlConfig);
 
 Entity<String> postCallInput = Entity.entity(authRequest, "application/soap+xml; charset=utf-8");
 
