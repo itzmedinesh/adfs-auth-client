@@ -1,6 +1,9 @@
 # adfs-auth-client
 Java client for authentication against active directory federation service(ADFS) - SAML,JWT,BST
 
+# Versions on maven
+http://central.maven.org/maven2/com/github/itzmedinesh/adfs-auth-client/
+
 # Create ADFS SignOn request
 *********************************************************************
 
