@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.w3.org/2000/09/xmldsig#" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:trust="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:b="http://docs.oasis-open.org/wss/oasis-wss-wssecurity-secext-1.1.xsd" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+  <xs:import namespace="http://docs.oasis-open.org/ws-sx/ws-trust/200512" schemaLocation="trust.xsd"/>
+  <xs:import namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" schemaLocation="wsse.xsd"/>
+  <xs:import namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" schemaLocation="samresp.xsd"/>
+  <xs:import namespace="http://docs.oasis-open.org/wss/oasis-wss-wssecurity-secext-1.1.xsd" schemaLocation="b.xsd"/>
+  <xs:import namespace="http://schemas.xmlsoap.org/ws/2004/09/policy" schemaLocation="wsp.xsd"/>
+  <xs:import namespace="http://www.w3.org/2003/05/soap-envelope" schemaLocation="soap.xsd"/>
+  <xs:import namespace="http://www.w3.org/2005/08/addressing" schemaLocation="wsa.xsd"/>
+  <xs:element name="Signature">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ds:SignedInfo"/>
+        <xs:element ref="ds:SignatureValue"/>
+        <xs:element name="KeyInfo" form="unqualified">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="ds:X509Data"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SignedInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ds:CanonicalizationMethod"/>
+        <xs:element ref="ds:SignatureMethod"/>
+        <xs:element ref="ds:Reference"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CanonicalizationMethod">
+    <xs:complexType>
+      <xs:attribute name="Algorithm" use="required" type="xs:anyURI"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SignatureMethod">
+    <xs:complexType>
+      <xs:attribute name="Algorithm" use="required" type="xs:anyURI"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Reference">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ds:Transforms"/>
+        <xs:element ref="ds:DigestMethod"/>
+        <xs:element ref="ds:DigestValue"/>
+      </xs:sequence>
+      <xs:attribute name="URI" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Transforms">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="ds:Transform"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Transform">
+    <xs:complexType>
+      <xs:attribute name="Algorithm" use="required" type="xs:anyURI"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DigestMethod">
+    <xs:complexType>
+      <xs:attribute name="Algorithm" use="required" type="xs:anyURI"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DigestValue" type="xs:string"/>
+  <xs:element name="SignatureValue" type="xs:base64Binary"/>
+  <xs:element name="X509Data">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ds:X509Certificate"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="X509Certificate" type="xs:base64Binary"/>
+</xs:schema>

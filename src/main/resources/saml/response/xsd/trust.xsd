@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:trust="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:b="http://docs.oasis-open.org/wss/oasis-wss-wssecurity-secext-1.1.xsd" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+  <xs:import namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" schemaLocation="wsse.xsd"/>
+  <xs:import namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" schemaLocation="samresp.xsd"/>
+  <xs:import namespace="http://docs.oasis-open.org/wss/oasis-wss-wssecurity-secext-1.1.xsd" schemaLocation="b.xsd"/>
+  <xs:import namespace="http://schemas.xmlsoap.org/ws/2004/09/policy" schemaLocation="wsp.xsd"/>
+  <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="ds.xsd"/>
+  <xs:import namespace="http://www.w3.org/2003/05/soap-envelope" schemaLocation="soap.xsd"/>
+  <xs:import namespace="http://www.w3.org/2005/08/addressing" schemaLocation="wsa.xsd"/>
+  <xs:element name="RequestSecurityTokenResponseCollection">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="trust:RequestSecurityTokenResponse"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestSecurityTokenResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="trust:Lifetime"/>
+        <xs:element ref="wsp:AppliesTo"/>
+        <xs:element ref="trust:RequestedSecurityToken"/>
+        <xs:element ref="trust:RequestedAttachedReference"/>
+        <xs:element ref="trust:RequestedUnattachedReference"/>
+        <xs:element ref="trust:TokenType"/>
+        <xs:element ref="trust:RequestType"/>
+        <xs:element ref="trust:KeyType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Lifetime">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="wsu:Created"/>
+        <xs:element ref="wsu:Expires"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestedSecurityToken">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Assertion" form="unqualified">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Issuer" form="unqualified" type="xs:anyURI"/>
+              <xs:element ref="ds:Signature"/>
+              <xs:element name="Subject" form="unqualified">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="SubjectConfirmation" form="unqualified">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="SubjectConfirmationData" form="unqualified">
+                            <xs:complexType>
+                              <xs:attribute name="NotOnOrAfter" use="required" type="xs:dateTime"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="Method" use="required" type="xs:anyURI"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Conditions" form="unqualified">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="AudienceRestriction" form="unqualified">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Audience" form="unqualified" type="xs:NMTOKEN"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="NotBefore" use="required" type="xs:dateTime"/>
+                  <xs:attribute name="NotOnOrAfter" use="required" type="xs:dateTime"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="AttributeStatement" form="unqualified">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Attribute" form="unqualified">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="AttributeValue" form="unqualified" type="xs:NCName"/>
+                        </xs:sequence>
+                        <xs:attribute name="Name" use="required" type="xs:NCName"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="AuthnStatement" form="unqualified">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="AuthnContext" form="unqualified">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="AuthnContextClassRef" form="unqualified" type="xs:anyURI"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="AuthnInstant" use="required" type="xs:dateTime"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="ID" use="required"/>
+            <xs:attribute name="IssueInstant" use="required" type="xs:dateTime"/>
+            <xs:attribute name="Version" use="required" type="xs:decimal"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestedAttachedReference" type="wsu:wsse.SecurityTokenReference"/>
+  <xs:element name="RequestedUnattachedReference" type="wsu:wsse.SecurityTokenReference"/>
+  <xs:element name="TokenType" type="xs:anyURI"/>
+  <xs:element name="RequestType" type="xs:anyURI"/>
+  <xs:element name="KeyType" type="xs:anyURI"/>
+</xs:schema>

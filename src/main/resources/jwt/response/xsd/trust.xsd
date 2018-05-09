@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:a="http://www.w3.org/2005/08/addressing" xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:trust="http://docs.oasis-open.org/ws-sx/ws-trust/200512" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:o="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+  <xs:import namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" schemaLocation="o.xsd"/>
+  <xs:import namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" schemaLocation="bintokresp.xsd"/>
+  <xs:import namespace="http://schemas.xmlsoap.org/ws/2004/09/policy" schemaLocation="wsp.xsd"/>
+  <xs:import namespace="http://www.w3.org/2003/05/soap-envelope" schemaLocation="s.xsd"/>
+  <xs:import namespace="http://www.w3.org/2005/08/addressing" schemaLocation="a.xsd"/>
+  <xs:element name="RequestSecurityTokenResponseCollection">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="trust:RequestSecurityTokenResponse"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestSecurityTokenResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="trust:Lifetime"/>
+        <xs:element ref="wsp:AppliesTo"/>
+        <xs:element ref="trust:RequestedSecurityToken"/>
+        <xs:element ref="trust:TokenType"/>
+        <xs:element ref="trust:RequestType"/>
+        <xs:element ref="trust:KeyType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Lifetime">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="u:Created"/>
+        <xs:element ref="u:Expires"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestedSecurityToken">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="o:BinarySecurityToken"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TokenType" type="xs:anyURI"/>
+  <xs:element name="RequestType" type="xs:anyURI"/>
+  <xs:element name="KeyType" type="xs:anyURI"/>
+</xs:schema>

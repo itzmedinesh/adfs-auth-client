@@ -1,0 +1,25 @@
+import static org.gradle.api.JavaVersion.VERSION_1_8
+
+apply plugin: 'java'
+apply plugin:'maven'
+
+sourceCompatibility = VERSION_1_8
+targetCompatibility = VERSION_1_8
+
+ext {
+	projectName = 'adfs-auth-client'
+}
+
+repositories {
+	maven {
+		url "https://repo.maven.apache.org/maven2"
+	}
+}
+
+dependencies {
+    compile 'javax.xml.bind:jaxb-api:2.2.7'
+    compile 'com.sun.xml.bind:jaxb-core:2.2.7'
+    compile 'com.sun.xml.bind:jaxb-impl:2.2.7-b41'
+
+    testCompile "junit:junit:4.11"
+}
